@@ -1,0 +1,8 @@
+*.DS_Store
+/src/shared/config.json
+/config.json
+/log/*
+*.log
+*out
+/node_modules/*
+/node_modules

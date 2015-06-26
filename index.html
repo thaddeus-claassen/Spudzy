@@ -1,9 +1,39 @@
-<body>
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Dopeness Ninja">
+      <meta name="description" content="The bestest game ever created.">
+      <meta name="author" content="Charles Lockner and Patrick Riordan">
+
+      <!-- FAVICON -->
+      <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+      <!-- The Styles -->
+      <link rel="stylesheet" href="css/portal.css">
+
+      <title>Spudzy</title>
+   </head>
+
+   <body>
+      <canvas id="can" width="800" height="520" tabindex = "1" >
+         Your browser does not support HTML5 Canvas.
+      </canvas>
+   </body>
+
+   <!-- Lib JS Files -->
+   <script type="text/javascript" src="src/client/lib/gl-matrix-min.js"></script>
+   <script type="text/javascript" src="src/client/lib/jquery.min.js"></script>
+
+   <!-- Main JS Files -->
+   <script type="text/javascript" src="src/client/spudzy.js"></script>
 
 
+   <script>
+      $(document).ready(function() {
+         start();
+      });
+   </script>
 
-Hi There
-
-
-
-</body>
+</html>
