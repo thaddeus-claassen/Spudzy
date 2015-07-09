@@ -57,15 +57,15 @@ Spudzy.prototype.bindEvents = function() {
 
    canvas.addEventListener('mousemove', function(e) {
       self.setMousePosition(e);
-      self.onMouseMove();
+      self.onMouseMove(self.controls.mousePosition.x, self.controls.mousePosition.y);
    }, false);
 
    $(window).mouseup(function() {
-      self.onMouseUp();
+      self.onMouseUp(self.controls.mousePosition.x, self.controls.mousePosition.y);
    });
 
    $(window).mousedown(function() {
-      self.onMouseDown();
+      self.onMouseDown(self.controls.mousePosition.x, self.controls.mousePosition.y);
    });
 
    // $(window).bind('click', function (e) {

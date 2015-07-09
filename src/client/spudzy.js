@@ -5,13 +5,32 @@ var Spudzy = function() {
    this.initControls();
 }
 
+var planet;
+var guy;
+
 Spudzy.prototype.start = function() {
+	planet = new Planet({x:200,y:200},0)
+   guy = new Unit(planet);
 
-	var planet = new Planet({x:200,y:200},0)
-   var guy = new Unit(planet);
-	guy.draw();
-
+   // Starts looping
+   this.loop();
 }// end start()
+
+Spudzy.prototype.loop = function() {
+   this.updateState();
+   this.drawFrame();
+
+   window.requestAnimationFrame(this.loop.bind(this));
+}
+
+Spudzy.prototype.updateState = function() {
+
+}
+
+Spudzy.prototype.drawFrame = function() {
+   planet.draw();
+   guy.draw();
+}
 
 var Vector = function(x, y) {
 	this.x = x;
@@ -62,7 +81,7 @@ Unit.prototype.moveTo = function(newPlanet) {
 }// end moveTo()
 
 Unit.prototype.draw = function() {
-	context.fillStyle = "#c82124";
+	context.fillStyle = "#8c1242";
 	context.beginPath();
 	context.arc(this.position.x, this.position.y, this.radius, 0, 2*Math.PI, true);
 	context.closePath();
@@ -71,14 +90,14 @@ Unit.prototype.draw = function() {
 
 
 
-Spudzy.prototype.onMouseMove = function() {
-   console.log("move: " + this.controls.mousePosition.x + ", " + this.controls.mousePosition.y);
+Spudzy.prototype.onMouseMove = function(x, y) {
+   console.log("move: " + x + ", " + y);
 }
 
-Spudzy.prototype.onMouseUp = function() {
-   console.log("up: " + this.controls.mousePosition.x + ", " + this.controls.mousePosition.y);
+Spudzy.prototype.onMouseUp = function(x, y) {
+   console.log("up: " + x + ", " + y);
 }
 
-Spudzy.prototype.onMouseDown = function() {
-   console.log("down: " + this.controls.mousePosition.x + ", " + this.controls.mousePosition.y);
+Spudzy.prototype.onMouseDown = function(x, y) {
+   console.log("down: " + x + ", " + y);
 }
