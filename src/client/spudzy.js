@@ -10,7 +10,7 @@ var planet;
 var guy;
 
 Spudzy.prototype.start = function() {
-	planet = new Planet({x:200,y:200},0)
+	planet = new Planet({x:200,y:200},0);
    guy = new Unit(planet);
 
    // Starts looping
@@ -25,16 +25,16 @@ Spudzy.prototype.loop = function(currentTime) {
    this.drawFrame();
 
    window.requestAnimationFrame(this.loop.bind(this));
-}
+}// end loop()
 
 Spudzy.prototype.updateState = function(time, dt) {
-   // console.log(dt);
-}
+   planet.update(dt);
+}// end updateState()
 
 Spudzy.prototype.drawFrame = function() {
    planet.draw();
    guy.draw();
-}
+}// end drawFrame
 
 var Vector = function(x, y) {
 	this.x = x;
@@ -52,15 +52,32 @@ Vector.prototype.normalize = function() {
 }// end normalize()
 
 var Planet = function(position, playerID) {
+   this.units = [];
 	this.position = position;
 	this.playerID = playerID;
 	this.radius = 30;
 	this.unitCreationRate = 1; // unit/s
+   this.spawnTimer = 0;
 }// end Planet()
 
-Planet.prototype.spawnUnits = function() {
-   var newUnit = new Unit(this);
+Planet.prototype.spawnUnit = function() {
+   var newUnit = new Unit({x:Math.random()*500, y:Math.random()*500});
+   this.units.push(newUnit);
 }// end spawn()
+
+Planet.prototype.moveUnits = function(newPlanet, percent) {
+   for (var i=0; i<this.units.length*(percent/100) i++) {
+
+   }// end for
+}// end moveUnits()
+
+Planet.prototype.update = function(dt) {
+   this.spawnTimer += dt;
+   if (this.spawnTimer > this.unitCreationRate*1000) {
+      this.spawnTimer -= this.unitCreationRate*1000;
+      this.spawnUnit();
+   }// end if
+}// end update()
 
 Planet.prototype.draw = function() {
 	context.fillStyle = "#c82124";
@@ -70,16 +87,17 @@ Planet.prototype.draw = function() {
 	context.fill();
 }// end draw()
 
-var Unit = function(planet) {
-	this.planet = planet;
-	this.playerID = planet.playerID;
-	this.position = planet.position;
+var Unit = function(position) {
+   this.position = position;
 	this.speed = 1;
 	this.radius = 5;
 }// end Unit()
 
-Unit.prototype.moveTo = function(newPlanet) {
-	var direction = new Vector(newPlanet.x - this.x, newPlanet.y - this.y);
+Unit.prototype.setPlayer = function(playerID) {
+   this.playerID = playerID;
+}// end setPlayer()
+
+Unit.prototype.moveTo = function(direction) {
 	this.x += this.speed * direction.x;
 	this.y += this.speed * direction.y;
 }// end moveTo()
