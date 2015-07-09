@@ -27,12 +27,19 @@ Spudzy.prototype.loop = function(currentTime) {
 } // end loop()
 
 Spudzy.prototype.updateState = function(time, dt) {
-   planet.update(dt);
+   for (var i = 0; i < planets.length; i++) {
+      planets[i].update(dt);
+   }
 } // end updateState()
 
 Spudzy.prototype.drawFrame = function() {
-   planet.draw();
-   guy.draw();
+   for (var pI = 0; pI < planets.length; pI++) {
+      var planet = planets[pI];
+      planet.draw();
+      for (var uI = 0; uI < planet.units.length; uI++) {
+         planet.units[uI].draw();
+      }
+   }
 } // end drawFrame()
 
 Spudzy.prototype.onMouseMove = function(x, y) {
