@@ -1,6 +1,6 @@
 
-var planet;
-var guy;
+var planets;
+var currPlanet;
 
 var Spudzy = function() {
    this.initControls();
@@ -8,12 +8,13 @@ var Spudzy = function() {
 }
 
 Spudzy.prototype.start = function() {
-	planet = new Planet(new Vector(200, 200),0);
-   guy = new Unit(planet);
+   planets = [];
+	var planet = new Planet(new Vector(200, 200),0);
+   planets.push(planet);
 
    // Starts looping
    window.requestAnimationFrame(this.loop.bind(this));
-}// end start()
+} // end start()
 
 Spudzy.prototype.loop = function(currentTime) {
    var dt = currentTime - this.lastTime;
@@ -23,25 +24,33 @@ Spudzy.prototype.loop = function(currentTime) {
    this.drawFrame();
 
    window.requestAnimationFrame(this.loop.bind(this));
-}// end loop()
+} // end loop()
 
 Spudzy.prototype.updateState = function(time, dt) {
    planet.update(dt);
-}// end updateState()
+} // end updateState()
 
 Spudzy.prototype.drawFrame = function() {
    planet.draw();
    guy.draw();
-}// end drawFrame
+} // end drawFrame()
 
 Spudzy.prototype.onMouseMove = function(x, y) {
    console.log("move: " + x + ", " + y);
-}
+} // end onMouseMove()
 
 Spudzy.prototype.onMouseUp = function(x, y) {
    console.log("up: " + x + ", " + y);
-}
+} // end onMouseUp()
 
 Spudzy.prototype.onMouseDown = function(x, y) {
    console.log("down: " + x + ", " + y);
-}
+   for (var i = 0; i < planets.length; i++) {
+      var thePlanet = planets[i];
+      var vector = new Vector(thePlanet.position.x - x, thePlanet.position.y - y);
+      if (vector.length <= thePlanet.radius) {
+         currPlanet = thePlanet;
+         break;
+      } // end if
+   } // end for
+} // end onMouseDown()

@@ -8,13 +8,14 @@ var Planet = function(position, playerID) {
 }// end Planet()
 
 Planet.prototype.spawnUnit = function() {
-   var newUnit = new Unit({x:Math.random()*500, y:Math.random()*500});
+   var newUnit = new Unit(this.playerID, {x:Math.random()*500, y:Math.random()*500});
    this.units.push(newUnit);
 }// end spawn()
 
 Planet.prototype.moveUnits = function(newPlanet, percent) {
    for (var i = 0; i < this.units.length*(percent/100); i++) {
-
+      var theUnit = units[i];
+      theUnit.moveTo(newPlanet);
    }// end for
 }// end moveUnits()
 
