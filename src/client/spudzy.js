@@ -8,7 +8,7 @@ var Spudzy = function() {
 Spudzy.prototype.start = function() {
 
 	var planet = new Planet({x:200,y:200},0)
-	var guy = new Unit(planet);
+   var guy = new Unit(planet);
 	guy.draw();
 
 }// end start()
@@ -16,17 +16,17 @@ Spudzy.prototype.start = function() {
 var Vector = function(x, y) {
 	this.x = x;
 	this.y = y;
-}
+}// end Vector()
 
 Vector.prototype.length = function() {
 	return Math.sqrt(this.x * this.x + this.y * this.y);
-}
+}// end length()
 
 Vector.prototype.normalize = function() {
 	var len = this.length();
 	this.x = this.x / len;
 	this.y = this.y / len;
-}
+}// end normalize()
 
 var Planet = function(position, playerID) {
 	this.position = position;
@@ -34,6 +34,10 @@ var Planet = function(position, playerID) {
 	this.radius = 30;
 	this.unitCreationRate = 1; // unit/s
 }// end Planet()
+
+Planet.prototype.spawnUnits() {
+   var newUnit = new Unit(this);
+}// end spawn()
 
 Planet.prototype.draw = function() {
 	context.fillStyle = "#c82124";
