@@ -3,6 +3,7 @@ var context = canvas.getContext('2d');
 
 var Spudzy = function() {
    this.initControls();
+   this.lastTime = 0;
 }
 
 var planet;
@@ -13,18 +14,21 @@ Spudzy.prototype.start = function() {
    guy = new Unit(planet);
 
    // Starts looping
-   this.loop();
+   window.requestAnimationFrame(this.loop.bind(this));
 }// end start()
 
-Spudzy.prototype.loop = function() {
-   this.updateState();
+Spudzy.prototype.loop = function(currentTime) {
+   var dt = currentTime - this.lastTime;
+   this.lastTime = currentTime;
+
+   this.updateState(currentTime, dt);
    this.drawFrame();
 
    window.requestAnimationFrame(this.loop.bind(this));
 }
 
-Spudzy.prototype.updateState = function() {
-
+Spudzy.prototype.updateState = function(time, dt) {
+   // console.log(dt);
 }
 
 Spudzy.prototype.drawFrame = function() {
