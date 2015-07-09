@@ -1,14 +1,18 @@
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 
-function start() {
+var Spudzy = function() {
+   this.initControls();
+}
+
+Spudzy.prototype.start = function() {
 
 	var planet = new Planet({x:200,y:200},0)
-   	var guy = new Unit(planet);
-   	guy.draw();
+	var guy = new Unit(planet);
+	guy.draw();
 
 }// end start()
- 
+
 var Vector = function(x, y) {
 	this.x = x;
 	this.y = y;
@@ -60,3 +64,17 @@ Unit.prototype.draw = function() {
 	context.closePath();
 	context.fill();
 }// end draw()
+
+
+
+Spudzy.prototype.onMouseMove = function() {
+   console.log("move: " + this.controls.mousePosition.x + ", " + this.controls.mousePosition.y);
+}
+
+Spudzy.prototype.onMouseUp = function() {
+   console.log("up: " + this.controls.mousePosition.x + ", " + this.controls.mousePosition.y);
+}
+
+Spudzy.prototype.onMouseDown = function() {
+   console.log("down: " + this.controls.mousePosition.x + ", " + this.controls.mousePosition.y);
+}

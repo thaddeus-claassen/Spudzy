@@ -28,11 +28,12 @@
 
    <!-- Main JS Files -->
    <script type="text/javascript" src="src/client/spudzy.js"></script>
-
+   <script type="text/javascript" src="src/client/controls.js"></script>
 
    <script>
       $(document).ready(function() {
-         start();
+         var game = new Spudzy();
+         game.start();
       });
    </script>
 
