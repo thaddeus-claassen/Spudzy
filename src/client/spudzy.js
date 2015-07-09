@@ -35,7 +35,7 @@ var Planet = function(position, playerID) {
 	this.unitCreationRate = 1; // unit/s
 }// end Planet()
 
-Planet.prototype.spawnUnits() {
+Planet.prototype.spawnUnits = function() {
    var newUnit = new Unit(this);
 }// end spawn()
 
