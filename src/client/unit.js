@@ -5,7 +5,8 @@ var Unit = function(planet, position) {
    this.color = "#8c1242";
    this.speed = 5;
    this.radius = 5;
-   this.orbitDistance = randomRange(0,15);
+   this.orbitDistance = randomRange(2,25);
+   this.orbitAngle = randomAngle();
 } // end Unit()
 
 Unit.prototype.setPlayer = function(playerID) {
@@ -18,17 +19,16 @@ Unit.prototype.moveTo = function(planet) {
 }// end moveTo()
 
 Unit.prototype.update = function(dt) {
-   var planetVec = this.planet.position.subtracted(this.position);
-   var direction = planetVec.normalized();
-   var distSquared = (planetVec).lengthSquared();
+   var orbitDistance = this.planet.radius + this.radius + this.orbitDistance;
+   var orbitDirection = Vector.prototype.fromAngle(this.planet.orbitOffset + this.orbitAngle);
+   var orbitLocation = this.planet.position.added(orbitDirection.constMulted(orbitDistance));
+   var unitToDest = orbitLocation.subtracted(this.position);
 
-   if (distSquared < square(this.planet.radius + this.radius + this.orbitDistance)) {
-      // orbit
+   var distanceToDest = unitToDest.length();
+   var displacement = 0.01 * this.speed * dt;
+   displacement = Math.min(displacement, distanceToDest);
 
-   } else {
-      // move towards
-      this.position.add(direction.constMulted(0.01 * this.speed * dt));
-   }
+   this.position.add(unitToDest.normalized().constMulted(displacement));
 }
 
 Unit.prototype.draw = function() {
