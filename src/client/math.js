@@ -34,12 +34,31 @@ Vector.prototype.constMulted = function(num) {
 }// end constMulted()
 
 // Add a vector to this vector
-Vector.prototype.vecAdd = function(vec) {
+Vector.prototype.add = function(vec) {
    this.x += vec.x;
    this.y += vec.y;
 }
 
-// Return a new vector that was a added to by another vector
-Vector.prototype.vecAdded = function(vec) {
+// Return a new vector that was added to by another vector
+Vector.prototype.added = function(vec) {
    return new Vector(this.x + vec.x, this.y + vec.y);
+}
+
+// Subtract a vector from this vector
+Vector.prototype.subtract = function(vec) {
+   this.x -= vec.x;
+   this.y -= vec.y;
+}
+
+// Return a new vector that was subtracted by another vector
+Vector.prototype.subtracted = function(vec) {
+   return new Vector(this.x - vec.x, this.y - vec.y);
+}
+
+var randomRange = function(low, high) {
+   return (high - low) * Math.random() + low;
+}
+
+var randomAngle = function() {
+   return randomRange(0, 2 * Math.PI);
 }

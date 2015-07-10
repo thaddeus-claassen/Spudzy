@@ -2,8 +2,9 @@ var Unit = function(planet, position) {
    this.planet = planet;
    this.playerID = planet.playerID;
    this.position = position;
-   this.speed = 1;
+   this.speed = 5;
    this.radius = 5;
+   this.orbitDistance = randomRange(0,15);
 } // end Unit()
 
 Unit.prototype.setPlayer = function(playerID) {
@@ -16,15 +17,16 @@ Unit.prototype.moveTo = function(planet) {
 }// end moveTo()
 
 Unit.prototype.update = function(dt) {
-   var planetVec = new Vector(this.planet.x - this.x, this.planet.y - this.y);
+   var planetVec = this.planet.position.subtracted(this.position);
    var direction = planetVec.normalized();
    var dist = (planetVec).length();
 
-   if (dist < this.planet.radius * 1.5) {
+   if (dist < this.planet.radius + this.radius + this.orbitDistance) {
       // orbit
+
    } else {
       // move towards
-      this.position.vecAdd(direction.constMulted(dt));
+      this.position.add(direction.constMulted(0.01 * this.speed * dt));
    }
 }
 

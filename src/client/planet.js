@@ -2,13 +2,13 @@ var Planet = function(position, playerID) {
    this.units = [];
    this.position = position;
    this.playerID = playerID;
-   this.radius = 30;
+   this.radius = randomRange(25,40);
    this.unitCreationRate = 1; // unit/s
    this.spawnTimer = 0;
 }// end Planet()
 
 Planet.prototype.spawnUnit = function() {
-   var newUnit = new Unit(this.playerID, {x:Math.random()*500, y:Math.random()*500});
+   var newUnit = new Unit(this, new Vector(Math.random()*500, Math.random()*500));
    this.units.push(newUnit);
 }// end spawn()
 

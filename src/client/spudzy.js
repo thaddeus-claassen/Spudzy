@@ -9,8 +9,9 @@ var Spudzy = function() {
 
 Spudzy.prototype.start = function() {
    planets = [];
-	var planet = new Planet(new Vector(200, 200),0);
-   planets.push(planet);
+   var border = 50;
+   for (var i = 0; i < 4; i++)
+      planets.push(new Planet(new Vector(randomRange(border, canvas.width - border), randomRange(border, canvas.height - border)),0));
 
    // Starts looping
    window.requestAnimationFrame(this.loop.bind(this));
@@ -29,10 +30,17 @@ Spudzy.prototype.loop = function(currentTime) {
 Spudzy.prototype.updateState = function(time, dt) {
    for (var i = 0; i < planets.length; i++) {
       planets[i].update(dt);
+      for (var j = 0; j < planets[i].units.length; j++) {
+         planets[i].units[j].update(dt);
+      }
    }
 } // end updateState()
 
 Spudzy.prototype.drawFrame = function() {
+   // clear the canvas
+   context.fillStyle="#FFAFAF";
+   context.fillRect(0, 0, canvas.width, canvas.height);
+
    for (var pI = 0; pI < planets.length; pI++) {
       var planet = planets[pI];
       planet.draw();

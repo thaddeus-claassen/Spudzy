@@ -44,37 +44,37 @@ Spudzy.prototype.setMousePosition = function(e) {
 Spudzy.prototype.bindEvents = function() {
    var self = this;
 
-   $(window).bind('keydown', function(e) {
+   $(canvas).bind('keydown', function(e) {
       var keyCode = e.keyCode || e.which;
       self.controls.keyToggles[keyCode] = true;
       console.log(keyCode);
    });
 
-   $(window).bind('keyup', function(e) {
+   $(canvas).bind('keyup', function(e) {
       var keyCode = e.keyCode || e.which;
       self.controls.keyToggles[keyCode] = false;
    });
 
-   canvas.addEventListener('mousemove', function(e) {
+   $(canvas).mousemove(function(e) {
       self.setMousePosition(e);
       self.onMouseMove(self.controls.mousePosition.x, self.controls.mousePosition.y);
-   }, false);
+   });
 
-   $(window).mouseup(function() {
+   $(canvas).mouseup(function() {
       self.onMouseUp(self.controls.mousePosition.x, self.controls.mousePosition.y);
    });
 
-   $(window).mousedown(function() {
+   $(canvas).mousedown(function() {
       self.onMouseDown(self.controls.mousePosition.x, self.controls.mousePosition.y);
    });
 
-   // $(window).bind('click', function (e) {
-   //    canvas.requestPointerLock = canvas.requestPointerLock ||
-   //                                canvas.mozRequestPointerLock ||
-   //                                canvas.webkitRequestPointerLock ||
-   //                                canvas.msRequestPointerLock;
-   //    canvas.requestPointerLock();
-   //    launchIntoFullscreen(canvas);
-   // });
+   $(canvas).bind('click', function (e) {
+      canvas.requestPointerLock = canvas.requestPointerLock ||
+                                  canvas.mozRequestPointerLock ||
+                                  canvas.webkitRequestPointerLock ||
+                                  canvas.msRequestPointerLock;
+      canvas.requestPointerLock();
+      launchIntoFullscreen(canvas);
+   });
 }
 
