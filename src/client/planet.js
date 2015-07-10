@@ -1,9 +1,10 @@
 var Planet = function(position, playerID) {
    this.units = [];
-   this.position = position;
    this.playerID = playerID;
+   this.position = position;
+   this.color = "#c82124";
    this.radius = randomRange(25,40);
-   this.unitCreationRate = 1; // unit/s
+   this.unitCreationRate = 1; // unit/second
    this.spawnTimer = 0;
 }// end Planet()
 
@@ -28,7 +29,7 @@ Planet.prototype.update = function(dt) {
 }// end update()
 
 Planet.prototype.draw = function() {
-   context.fillStyle = "#c82124";
+   context.fillStyle = this.color;
    context.beginPath();
    context.arc(this.position.x, this.position.y, this.radius, 0, 2*Math.PI, true);
    context.closePath();

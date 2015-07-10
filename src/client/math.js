@@ -2,36 +2,40 @@
 var Vector = function(x, y) {
    this.x = x;
    this.y = y;
-}// end Vector()
+}
+
+Vector.prototype.lengthSquared = function() {
+   return this.x * this.x + this.y * this.y;
+}
 
 // Returns the magnitude of the vector
 Vector.prototype.length = function() {
-   return Math.sqrt(this.x * this.x + this.y * this.y);
-}// end length()
+   return Math.sqrt(this.lengthSquared());
+}
 
 // Normalize the vector
 Vector.prototype.normalize = function() {
    var len = this.length();
    this.x = this.x / len;
    this.y = this.y / len;
-}// end normalize()
+}
 
 // Return a new normalized vector
 Vector.prototype.normalized = function() {
    var len = this.length();
    return new Vector(this.x / len, this.y / len);
-}// end normalized()
+}
 
 // Multiply this vector by a constant
 Vector.prototype.constMult = function(num) {
    this.x = num * this.x;
    this.y = num * this.y;
-}// end constMult()
+}
 
 // Return a new vector multiplied by a constant
 Vector.prototype.constMulted = function(num) {
    return new Vector(num * this.x, num * this.y);
-}// end constMulted()
+}
 
 // Add a vector to this vector
 Vector.prototype.add = function(vec) {
@@ -61,4 +65,8 @@ var randomRange = function(low, high) {
 
 var randomAngle = function() {
    return randomRange(0, 2 * Math.PI);
+}
+
+var square = function(num) {
+   return num * num;
 }

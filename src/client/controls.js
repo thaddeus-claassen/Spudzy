@@ -61,10 +61,12 @@ Spudzy.prototype.bindEvents = function() {
    });
 
    $(canvas).mouseup(function() {
+      self.controls.mouseToggle = false;
       self.onMouseUp(self.controls.mousePosition.x, self.controls.mousePosition.y);
    });
 
    $(canvas).mousedown(function() {
+      self.controls.mouseToggle = true;
       self.onMouseDown(self.controls.mousePosition.x, self.controls.mousePosition.y);
    });
 
