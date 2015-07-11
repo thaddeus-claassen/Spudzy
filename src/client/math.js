@@ -59,6 +59,10 @@ Vector.prototype.subtracted = function(vec) {
    return new Vector(this.x - vec.x, this.y - vec.y);
 }
 
+Vector.prototype.fromAngle = function(angle) {
+   return new Vector(Math.cos(angle), Math.sin(angle));
+}
+
 var randomRange = function(low, high) {
    return (high - low) * Math.random() + low;
 }
@@ -67,7 +71,7 @@ var randomAngle = function() {
    return randomRange(0, 2 * Math.PI);
 }
 
-var square = function(num) {
+var squared = function(num) {
    return num * num;
 }
 

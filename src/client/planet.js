@@ -6,6 +6,7 @@ var Planet = function(position, playerID) {
    this.radius = randomRange(25,40);
    this.unitCreationRate = 1; // unit/second
    this.spawnTimer = 0;
+   this.orbitOffset = 0;
 }// end Planet()
 
 Planet.prototype.spawnUnit = function() {
@@ -23,6 +24,10 @@ Planet.prototype.moveUnits = function(newPlanet, percent) {
 }// end moveUnits()
 
 Planet.prototype.update = function(dt) {
+   // Update orbit offset
+   this.orbitOffset += .0005 * dt;
+
+   // Spawn units if it is time
    this.spawnTimer += dt;
    if (this.spawnTimer > this.unitCreationRate*1000) {
       this.spawnTimer -= this.unitCreationRate*1000;
