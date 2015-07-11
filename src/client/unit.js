@@ -20,7 +20,7 @@ Unit.prototype.moveTo = function(planet) {
 
 Unit.prototype.update = function(dt) {
    var orbitDistance = this.planet.radius + this.radius + this.orbitDistance;
-   var orbitDirection = Vector.prototype.fromAngle(this.planet.orbitOffset + this.orbitAngle);
+   var orbitDirection = new Vector(this.planet.orbitOffset + this.orbitAngle);
    var orbitLocation = this.planet.position.added(orbitDirection.constMulted(orbitDistance));
    var unitToDest = orbitLocation.subtracted(this.position);
 

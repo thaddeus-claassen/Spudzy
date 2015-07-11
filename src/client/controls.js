@@ -1,12 +1,5 @@
 
-var POINTER_LOCK_CHANGE = null;
-if ("onpointerlockchange" in document) {
-   POINTER_LOCK_CHANGE = 'pointerlockchange';
-} else if ("onmozpointerlockchange" in document) {
-   POINTER_LOCK_CHANGE = 'mozpointerlockchange';
-} else if ("onwebkitpointerlockchange" in document) {
-   POINTER_LOCK_CHANGE = 'webkitpointerlockchange';
-}
+// Fixes for pointer lock and full screen
 
 var launchIntoFullscreen = function(element) {
   if(element.requestFullscreen) {
@@ -47,12 +40,13 @@ Spudzy.prototype.bindEvents = function() {
    $(canvas).bind('keydown', function(e) {
       var keyCode = e.keyCode || e.which;
       self.controls.keyToggles[keyCode] = true;
-      console.log(keyCode);
+      self.onKeyDown(keyCode);
    });
 
    $(canvas).bind('keyup', function(e) {
       var keyCode = e.keyCode || e.which;
       self.controls.keyToggles[keyCode] = false;
+      self.onKeyUp(keyCode);
    });
 
    $(canvas).mousemove(function(e) {
@@ -68,14 +62,6 @@ Spudzy.prototype.bindEvents = function() {
    $(canvas).mousedown(function() {
       self.controls.mouseToggle = true;
       self.onMouseDown(self.controls.mousePosition.x, self.controls.mousePosition.y);
-   });
-
-   $(canvas).bind('click', function (e) {
-      canvas.requestPointerLock = canvas.requestPointerLock ||
-                                  canvas.mozRequestPointerLock ||
-                                  canvas.webkitRequestPointerLock ||
-                                  canvas.msRequestPointerLock;
-      canvas.requestPointerLock();
       launchIntoFullscreen(canvas);
    });
 }

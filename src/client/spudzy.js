@@ -38,17 +38,31 @@ Spudzy.prototype.updateState = function(time, dt) {
 
 Spudzy.prototype.drawFrame = function() {
    // clear the canvas
-   context.fillStyle="#FFAFAF";
+   context.fillStyle = "#FFAFAF";
    context.fillRect(0, 0, canvas.width, canvas.height);
 
+   // draw the planets and units
    for (var pI = 0; pI < planets.length; pI++) {
-      var planet = planets[pI];
-      planet.draw();
-      for (var uI = 0; uI < planet.units.length; uI++) {
-         planet.units[uI].draw();
+      planets[pI].draw();
+      for (var uI = 0; uI < planets[pI].units.length; uI++) {
+         planets[pI].units[uI].draw();
       }
    }
 } // end drawFrame()
+
+Spudzy.prototype.drawPercentage = function() {
+   // context.fillStyle = "#FFFFFF";
+   // ctx.font = "30px Arial";
+   // ctx.fillText("Percentage: " + this.percentage + "%",10,50);
+}
+
+Spudzy.prototype.onKeyDown = function(key) {
+   console.log(keyCode);
+}
+
+Spudzy.prototype.onKeyUp = function(key) {
+
+}
 
 Spudzy.prototype.onMouseMove = function(x, y) {
    console.log("move: " + x + ", " + y);

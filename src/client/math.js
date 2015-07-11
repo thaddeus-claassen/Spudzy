@@ -1,7 +1,12 @@
 
-var Vector = function(x, y) {
-   this.x = x;
-   this.y = y;
+var Vector = function() {
+   if (arguments.length == 1) {
+      this.x = Math.cos(arguments[0]);
+      this.y = Math.sin(arguments[0]);
+   } else {
+      this.x = arguments[0];
+      this.y = arguments[1];
+   }
 }
 
 Vector.prototype.lengthSquared = function() {
