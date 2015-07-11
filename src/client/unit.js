@@ -13,11 +13,6 @@ Unit.prototype.setPlayer = function(playerID) {
    this.playerID = playerID;
 } // end setPlayer()
 
-
-Unit.prototype.moveTo = function(planet) {
-   this.planet = planet;
-}// end moveTo()
-
 Unit.prototype.update = function(dt) {
    var orbitDistance = this.planet.radius + this.radius + this.orbitDistance;
    var orbitDirection = new Vector(this.planet.orbitOffset + this.orbitAngle);

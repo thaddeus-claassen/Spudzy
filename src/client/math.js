@@ -10,7 +10,7 @@ var Vector = function() {
 }
 
 Vector.prototype.lengthSquared = function() {
-   return this.x * this.x + this.y * this.y;
+   return (this.x * this.x) + (this.y * this.y);
 }
 
 // Returns the magnitude of the vector
@@ -79,3 +79,4 @@ var randomAngle = function() {
 var squared = function(num) {
    return num * num;
 }
+
