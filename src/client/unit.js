@@ -12,18 +12,13 @@ Unit.prototype.setPlayer = function(playerID) {
    this.playerID = playerID;
 } // end setPlayer()
 
-
-Unit.prototype.moveTo = function(planet) {
-   this.planet = planet;
-}// end moveTo()
-
 Unit.prototype.update = function(dt) {
    var planetVec = this.planet.position.subtracted(this.position);
    var direction = planetVec.normalized();
    var distSquared = (planetVec).lengthSquared();
 
    if (distSquared < square(this.planet.radius + this.radius + this.orbitDistance)) {
-      this.planet.addUnit(this);
+      
       // orbit
 
    } else {

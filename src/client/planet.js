@@ -14,10 +14,11 @@ Planet.prototype.spawnUnit = function() {
 }// end spawn()
 
 Planet.prototype.moveUnits = function(newPlanet, percent) {
-   for (var i = this.units.length*(percent/100)-1; i >= 0 ; i--) {
-      var theUnit = units[i];
-      theUnit.moveTo(newPlanet);
-      this.units.splice(units.length-1, 1);
+   var length = this.units.length * (percent/100);
+   for (var i = 0; i < length; i++) {
+      var theUnit = this.units.pop();
+      theUnit.planet = newPlanet;
+      newPlanet.addUnit(theUnit);
    }// end for
 }// end moveUnits()
 
@@ -29,7 +30,7 @@ Planet.prototype.update = function(dt) {
    }// end if
 }// end update()
 
-Planet.prototype.addUnit(unit) {
+Planet.prototype.addUnit = function(unit) {
    this.units.push(unit);
 } // end addUnit()
 
